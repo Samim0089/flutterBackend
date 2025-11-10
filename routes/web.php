@@ -38,3 +38,20 @@ Route::get('/get-users', function () {
     $users = DB::table('users')->get(); // Fetch all rows from users table
     return response()->json($users);
 });
+
+Route::get('/show-users', function () {
+    try {
+        $users = User::all(); // fetch all rows from 'users' table
+        return response()->json([
+            'status' => 'Connected',
+            'count' => $users->count(),
+            'data' => $users
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'Error',
+            'message' => $e->getMessage()
+        ]);
+    }
+});
+
