@@ -11,7 +11,7 @@ Route::get('main', function(){
     return "This is The world of Programming";
 });
 
-Route::get('/check-db', function() {
+Route::get('check-db', function() {
     try {
         DB::connection()->getPdo(); // Test DB connection
         $tables = DB::select('SHOW TABLES'); // List all tables
