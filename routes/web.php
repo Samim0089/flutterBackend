@@ -35,7 +35,7 @@ Route::get('users', function () {
 });
 
 Route::get('/get-users', function () {
-    $users = DB::table('users')->get(); // Fetch all rows from users table
+    $users = DB::table('mytable')->get(); // Fetch all rows from users table
     return response()->json($users);
 });
 
