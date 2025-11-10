@@ -19,8 +19,7 @@ RUN apt-get update && apt-get install -y \
 # Set global ServerName to suppress AH00558 warning
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Copy custom Apache config for Laravel (optional if needed)
-# Create docker/000-default.conf in your project with proper <VirtualHost> settings
+# Copy Apache config (optional if needed)
 COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Install Composer
@@ -41,11 +40,16 @@ RUN php artisan config:clear \
     && php artisan route:clear \
     && php artisan view:clear
 
-# Optional: Run migrations automatically (skip errors)
+# Run migrations (ignore errors if no DB yet)
 RUN php artisan migrate --force || true
 
-# Expose port 80
-EXPOSE 80
+# ✅ Railway uses PORT environment variable (default: 8080)
+EXPOSE 8080
+ENV PORT=8080
 
-# Start Apache server
+# ✅ Make Apache listen on Railway’s dynamic port
+RUN sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf \
+    && sed -i "s/:80/:${PORT}/g" /etc/apache2/sites-available/000-default.conf
+
+# Start Apache
 CMD ["apache2-foreground"]
