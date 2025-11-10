@@ -29,8 +29,12 @@ Route::get('check-db', function() {
 });
 
 
-Route::get('/users', function () {
+Route::get('users', function () {
     $users = User::all(); // Fetch all users
     return response()->json($users); // Return JSON
 });
 
+Route::get('/get-users', function () {
+    $users = DB::table('users')->get(); // Fetch all rows from users table
+    return response()->json($users);
+});
