@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,3 +27,10 @@ Route::get('check-db', function() {
         ]);
     }
 });
+
+
+Route::get('/users', function () {
+    $users = User::all(); // Fetch all users
+    return response()->json($users); // Return JSON
+});
+
