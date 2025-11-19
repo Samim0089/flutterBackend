@@ -12,8 +12,8 @@ class MytableController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'count' => bloodApp::count(),
-            'data' => bloodApp::all()
+            'count' => Mytable::count(),
+            'data' => Mytable::all()
         ]);
     }
 
