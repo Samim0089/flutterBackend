@@ -10,7 +10,7 @@ class Mytable extends Model
     use HasFactory;
 
     // Specify the table name
-    protected $table = 'mytable';
+    protected $table = 'bloodApp';
 
     // Allow mass assignment
     protected $fillable = ['name', 'lastName'];
