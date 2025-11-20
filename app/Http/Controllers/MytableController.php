@@ -22,7 +22,7 @@ class MytableController extends Controller
     {
         $row = Mytable::find($id);
         if (!$row) {
-            return response()->json(['status'=>'error','message'=>'Record not found'],404);
+            return response()->json(['status' => 'error', 'message' => 'Record not found'], 404);
         }
         return response()->json($row);
     }
@@ -32,7 +32,7 @@ class MytableController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'lastName' => 'required|string',
+            // 'lastName' => 'required|string', // remove this line
         ]);
 
         $row = Mytable::create($request->all());
@@ -44,7 +44,7 @@ class MytableController extends Controller
     {
         $row = Mytable::find($id);
         if (!$row) {
-            return response()->json(['status'=>'error','message'=>'Record not found'],404);
+            return response()->json(['status' => 'error', 'message' => 'Record not found'], 404);
         }
         $row->update($request->all());
         return response()->json($row);
@@ -55,9 +55,9 @@ class MytableController extends Controller
     {
         $row = Mytable::find($id);
         if (!$row) {
-            return response()->json(['status'=>'error','message'=>'Record not found'],404);
+            return response()->json(['status' => 'error', 'message' => 'Record not found'], 404);
         }
         $row->delete();
-        return response()->json(['status'=>'success','message'=>'Record deleted']);
+        return response()->json(['status' => 'success', 'message' => 'Record deleted']);
     }
 }
