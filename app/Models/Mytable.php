@@ -13,7 +13,7 @@ class Mytable extends Model
     protected $table = 'mytable';
 
     // Allow mass assignment
-    protected $fillable = ['name', 'location', 'bloodGroup','phonenumber'];
+    protected $fillable = ['name', 'location', 'bloodgroup','phonenumber'];
 
     // Disable timestamps if your table doesn't have created_at/updated_at
     public $timestamps = false;
