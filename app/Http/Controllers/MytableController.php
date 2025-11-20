@@ -30,12 +30,15 @@ class MytableController extends Controller
     // Add new row
     public function store(Request $request)
     {
+        // Remove lastName requirement
         $request->validate([
             'name' => 'required|string',
-            // 'lastName' => 'required|string', // remove this line
+            'bloodgroup' => 'required|string',
+            'location' => 'required|string',
+            'phonenumber' => 'required|string',
         ]);
 
-        $row = Mytable::create($request->all());
+        $row = Mytable::create($request->only(['name', 'bloodgroup', 'location', 'phonenumber']));
         return response()->json($row, 201);
     }
 
@@ -46,7 +49,8 @@ class MytableController extends Controller
         if (!$row) {
             return response()->json(['status' => 'error', 'message' => 'Record not found'], 404);
         }
-        $row->update($request->all());
+
+        $row->update($request->only(['name', 'bloodgroup', 'location', 'phonenumber']));
         return response()->json($row);
     }
 
