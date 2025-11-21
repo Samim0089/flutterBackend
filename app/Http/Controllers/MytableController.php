@@ -49,9 +49,10 @@ class MytableController extends Controller
         $request->validate([
             'name' => 'required|string',
             'phonenumber' => 'required|string|unique:mytable,phonenumber',
-            'bloodGroup' => 'required|string',
+            'bloodgroup' => 'required|string', // lowercase matches Flutter
             'location' => 'required|string',
         ]);
+
 
         $row = Mytable::create($request->all());
 
